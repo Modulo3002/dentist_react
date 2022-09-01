@@ -1,10 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Home from "./Home";
 import Calendar from "./Calendar";
 import Day from "./Day";
+import Home from "./Home";
 
 import generateRandomAppointments from "./utils";
 
@@ -27,17 +27,19 @@ const App = () => (
         </ul>
       </nav>
       <main>
-        <Switch>
-          <Route path="/calendar">
-            <Calendar appointments={appointments} />
-          </Route>
-          <Route path="/day">
-            <Day appointments={appointments.filter(app => app.day === 1)} />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            path="/calendar"
+            element={<Calendar appointments={appointments} />}
+          />
+          <Route
+            path="/day"
+            element={
+              <Day appointments={appointments.filter((app) => app.day === 1)} />
+            }
+          />
+          <Route path="/" element={<Home />} />
+        </Routes>
       </main>
     </div>
   </Router>
