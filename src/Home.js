@@ -1,4 +1,6 @@
 import React from "react";
 import "./App.css";
 
-export default () => <div>Home!</div>;
+const Home = () => <div>Home!</div>;
+
+export default Home;

@@ -2,9 +2,9 @@ import React from "react";
 import "./Calendar.css";
 import DayInMonth from "./DayInMonth";
 
-const divideByDay = appointments => {
+const divideByDay = (appointments) => {
   const appointmentsByDay = {};
-  appointments.forEach(appointment => {
+  appointments.forEach((appointment) => {
     const day = appointment.day;
     if (!appointmentsByDay.hasOwnProperty(day)) {
       appointmentsByDay[day] = [];
@@ -14,14 +14,30 @@ const divideByDay = appointments => {
   return appointmentsByDay;
 };
 
-export default ({ appointments }) => {
+const Calender = ({ appointments }) => {
   const appointmentsByDay = divideByDay(appointments);
+  if (!(1 in appointmentsByDay)) {
+    // debugger;
+  }
 
-  const daysInMonthJSX = Object.values(
-    appointmentsByDay
-  ).map((appointmentsInDay, index) => (
-    <DayInMonth appointments={appointmentsInDay} key={index} />
-  ));
+  const daysForCalendar = [];
+  for (let iDay = 1; iDay <= 24; ++iDay) {
+    // if (iDay in appointmentsByDay) {
+    //   daysForCalendar.push(
+    //     <DayInMonth appointments={appointmentsByDay[iDay]} key={iDay} />
+    //   );
+    // } else {
+    //   daysForCalendar.push(<DayInMonth appointments={[]} key={iDay} />);
+    // }
+    daysForCalendar.push(
+      <DayInMonth appointments={appointmentsByDay[iDay] || []} key={iDay} />
+    );
+  }
+  // const daysInMonthJSX = Object.values(appointmentsByDay).map(
+  //   (appointmentsInDay, index) => (
+  //     <DayInMonth appointments={appointmentsInDay} key={index} />
+  //   )
+  // );
 
   return (
     <div className="calendarview">
@@ -32,7 +48,8 @@ export default ({ appointments }) => {
         <div>Donderdag</div>
         <div>Vrijdag</div>
       </div>
-      <div className="table">{daysInMonthJSX}</div>
+      <div className="table">{daysForCalendar}</div>
     </div>
   );
 };
+export default Calender;

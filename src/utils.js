@@ -1016,9 +1016,9 @@ const generateRandomAppointment = () => ({
   assistant: getRandomName(),
 });
 
-const generateRandomAppointments = num =>
+const generateRandomAppointments = (num) =>
   Array(num)
     .fill(0)
-    .map(_ => generateRandomAppointment());
+    .map((_) => generateRandomAppointment());
 
 export default generateRandomAppointments;
